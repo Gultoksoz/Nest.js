@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.schema';
+import { Throttle, seconds } from '@nestjs/throttler';
 
 @Controller('users')
 export class UsersController {
@@ -23,7 +24,7 @@ export class UsersController {
   findAllUsers(): Promise<User[]> {
     return this.usersService.findAllUsers();
   }
-
+  @Throttle({ default: { limit: 5, ttl: seconds(5) } })
   @Get(':userId')
   findUserById(@Param('userId') userId: string): Promise<User | null> {
     return this.usersService.findUserById(userId);
