@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User } from './user.schema';
+import { User } from './model/user.schema';
 import { Throttle, seconds } from '@nestjs/throttler';
 
 @Controller('users')
